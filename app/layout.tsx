@@ -18,19 +18,22 @@ const geistMono = Geist_Mono({
 const siteUrl = "https://mertguvencli.github.io/markbloom";
 
 export const metadata: Metadata = {
-  title: "MarkBloom — Free Online Markdown to PDF Converter",
+  title: "MarkBloom — Beautiful PDFs from Markdown | Free & Open Source",
   description:
-    "MarkBloom is a free, open-source Markdown to PDF converter. Write Markdown with live preview and export beautifully styled PDF documents with A4, Letter, and Legal page sizes. No sign-up required.",
+    "Turn Markdown into beautiful, print-ready PDF documents. Professional typography, smart pagination, syntax-highlighted code blocks, and styled tables. Free, open-source, 100% client-side — your content never leaves your browser.",
   keywords: [
+    "markdown to beautiful pdf",
     "markdown to pdf",
+    "beautiful pdf from markdown",
+    "professional pdf generator",
+    "print-ready markdown",
     "markdown pdf converter",
-    "markdown editor",
-    "online markdown to pdf",
-    "free markdown to pdf",
-    "open source markdown editor",
+    "styled markdown pdf",
     "markdown pdf export",
-    "markdown preview",
-    "tailwind pdf",
+    "free markdown to pdf",
+    "online markdown to pdf",
+    "markdown smart pagination",
+    "syntax highlighted pdf",
   ],
   authors: [{ name: "Mert Güvençli", url: "https://github.com/mertguvencli" }],
   creator: "Mert Güvençli",
@@ -40,17 +43,17 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    title: "MarkBloom — Free Online Markdown to PDF Converter",
+    title: "MarkBloom — Beautiful PDFs from Markdown",
     description:
-      "Free, open-source Markdown to PDF converter with live preview. Export styled PDFs in A4, Letter, and Legal sizes. No sign-up required.",
+      "Turn Markdown into beautiful, print-ready PDFs with professional typography, smart pagination, and syntax-highlighted code. Free, open-source, runs in your browser.",
     url: siteUrl,
     siteName: "MarkBloom",
   },
   twitter: {
     card: "summary_large_image",
-    title: "MarkBloom — Free Online Markdown to PDF Converter",
+    title: "MarkBloom — Beautiful PDFs from Markdown",
     description:
-      "Free, open-source Markdown to PDF converter with live preview. Export styled PDFs in A4, Letter, and Legal sizes.",
+      "Turn Markdown into beautiful, print-ready PDFs. Professional typography, smart pagination, syntax-highlighted code. Free & open-source.",
   },
   robots: {
     index: true,
@@ -67,7 +70,7 @@ const jsonLd = {
   "@type": "SoftwareApplication",
   name: "MarkBloom",
   description:
-    "Free, open-source Markdown to PDF converter with live preview. Write Markdown and export beautifully styled PDF documents in A4, Letter, and Legal page sizes.",
+    "Turn Markdown into beautiful, print-ready PDF documents with professional typography, smart pagination, and syntax-highlighted code blocks. Free, open-source, 100% client-side.",
   url: siteUrl,
   applicationCategory: "UtilitiesApplication",
   operatingSystem: "Any (Web Browser)",
@@ -88,12 +91,13 @@ const jsonLd = {
   isAccessibleForFree: true,
   license: "https://opensource.org/licenses/MIT",
   featureList: [
-    "Live Markdown editor with syntax highlighting",
-    "Real-time preview with Tailwind Typography styling",
-    "PDF export in A4, Letter, and Legal page sizes",
-    "GitHub Flavored Markdown support",
-    "Syntax-highlighted code blocks",
-    "Runs entirely in the browser",
+    "Beautiful, professionally formatted PDF output",
+    "Smart pagination with intelligent page break detection",
+    "Syntax-highlighted code blocks in PDF via Shiki",
+    "Styled tables, task lists, and blockquotes in PDF",
+    "Live preview — see your final PDF as you type",
+    "Multiple page sizes: A4, Letter, Legal",
+    "100% client-side — your content never leaves your browser",
   ],
 };
 
@@ -103,10 +107,18 @@ const faqJsonLd = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "How do I convert Markdown to PDF online for free?",
+      name: "How do I create beautiful PDFs from Markdown?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Open MarkBloom in your browser, paste or type your Markdown in the editor, preview it in real time, then click Export PDF. No sign-up or installation required.",
+        text: "Open MarkBloom, write or paste your Markdown, and click Export PDF. MarkBloom automatically applies professional typography, smart page breaks, and polished styling to produce print-ready PDF documents. No sign-up or installation required.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Why do my Markdown PDFs look ugly with other tools?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Most Markdown-to-PDF tools use basic styling with minimal attention to typography, pagination, or layout. MarkBloom is built specifically to produce beautiful output — with intelligent page breaks that avoid cutting tables or orphaning headings, syntax-highlighted code blocks, and professionally styled tables and lists.",
       },
     },
     {
@@ -114,7 +126,7 @@ const faqJsonLd = {
       name: "What page sizes does MarkBloom support?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "MarkBloom supports A4, US Letter, and Legal page sizes for PDF export.",
+        text: "MarkBloom supports A4, US Letter, and Legal page sizes for PDF export, each with proper margins and layout.",
       },
     },
     {
@@ -130,7 +142,7 @@ const faqJsonLd = {
       name: "Does MarkBloom support GitHub Flavored Markdown?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. MarkBloom supports GitHub Flavored Markdown (GFM) including tables, task lists, strikethrough, and syntax-highlighted code blocks.",
+        text: "Yes. MarkBloom supports GitHub Flavored Markdown (GFM) including tables, task lists, strikethrough, and syntax-highlighted code blocks — all rendered beautifully in the PDF output.",
       },
     },
     {

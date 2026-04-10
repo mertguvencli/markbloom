@@ -42,7 +42,7 @@ export default function Home() {
           </div>
           <Separator orientation="vertical" className="h-6" />
           <p className="text-sm text-zinc-500">
-            Free Online Markdown to PDF Converter
+            Beautiful PDFs from Markdown
           </p>
         </div>
 
@@ -119,42 +119,56 @@ export default function Home() {
       <footer className="sr-only" aria-label="About MarkBloom">
         <h2>What is MarkBloom?</h2>
         <p>
-          MarkBloom is a free, open-source Markdown to PDF converter that runs
-          entirely in your browser. Write or paste Markdown in the editor, see a
-          live-styled preview, and export to PDF in A4, Letter, or Legal page
-          sizes — no sign-up, no server uploads, no data leaves your device.
+          MarkBloom turns your Markdown into beautiful, print-ready PDF documents.
+          Unlike other converters that produce bland, poorly formatted output,
+          MarkBloom focuses on professional typography, smart pagination, and
+          polished styling — so your PDFs actually look good. It runs entirely in
+          your browser with no sign-up, no server uploads, and no data leaving
+          your device.
         </p>
 
-        <h2>Features</h2>
+        <h2>Why MarkBloom Produces Better PDFs</h2>
         <ul>
-          <li>Live Markdown editor with syntax highlighting powered by CodeMirror</li>
-          <li>Real-time preview styled with Tailwind Typography</li>
-          <li>One-click PDF export in A4, Letter, and Legal page sizes</li>
-          <li>Full GitHub Flavored Markdown support: tables, task lists, strikethrough</li>
-          <li>Syntax-highlighted code blocks via Shiki</li>
+          <li>Professional typography with clean heading hierarchy and balanced spacing</li>
+          <li>Smart pagination that never cuts tables mid-row or orphans headings</li>
+          <li>Syntax-highlighted code blocks rendered beautifully in PDF via Shiki</li>
+          <li>Styled tables with borders, padding, and proper alignment in PDF output</li>
+          <li>Task lists, blockquotes, and nested content that look polished in print</li>
+          <li>Multiple page sizes: A4, US Letter, and Legal with proper margins</li>
+          <li>Live preview — see exactly how your PDF will look as you type</li>
           <li>100% client-side — your content never leaves your browser</li>
-          <li>Open source under the MIT license</li>
+          <li>Free and open source under the MIT license</li>
         </ul>
 
-        <h2>How to Convert Markdown to PDF</h2>
+        <h2>How to Create Beautiful PDFs from Markdown</h2>
         <ol>
           <li>Open MarkBloom in your browser</li>
-          <li>Write or paste your Markdown in the left editor panel</li>
-          <li>Preview the styled output in the right panel in real time</li>
+          <li>Write or paste your Markdown in the editor</li>
+          <li>See a pixel-perfect live preview of your PDF output</li>
           <li>Select your page size (A4, Letter, or Legal)</li>
-          <li>Click &quot;Export PDF&quot; to download your document</li>
+          <li>Click &quot;Export PDF&quot; to download your beautifully formatted document</li>
         </ol>
 
         <h2>Frequently Asked Questions</h2>
-        <h3>How do I convert Markdown to PDF online for free?</h3>
+        <h3>How do I create beautiful PDFs from Markdown?</h3>
         <p>
-          Open MarkBloom in your browser, paste or type your Markdown in the
-          editor, preview it in real time, then click Export PDF. No sign-up or
-          installation required.
+          Open MarkBloom, write or paste your Markdown, and click Export PDF.
+          MarkBloom automatically applies professional typography, smart page
+          breaks, and polished styling to produce print-ready PDF documents.
+          No sign-up or installation required.
+        </p>
+
+        <h3>Why do my Markdown PDFs look ugly with other tools?</h3>
+        <p>
+          Most Markdown-to-PDF tools use basic styling with minimal attention to
+          typography, pagination, or layout. MarkBloom is built specifically to
+          produce beautiful output — with intelligent page breaks that avoid
+          cutting tables or orphaning headings, syntax-highlighted code blocks,
+          and professionally styled tables and lists.
         </p>
 
         <h3>What page sizes does MarkBloom support?</h3>
-        <p>MarkBloom supports A4, US Letter, and Legal page sizes for PDF export.</p>
+        <p>MarkBloom supports A4, US Letter, and Legal page sizes for PDF export, each with proper margins and layout.</p>
 
         <h3>Is MarkBloom free and open source?</h3>
         <p>
@@ -165,7 +179,8 @@ export default function Home() {
         <h3>Does MarkBloom support GitHub Flavored Markdown?</h3>
         <p>
           Yes. MarkBloom supports GitHub Flavored Markdown (GFM) including
-          tables, task lists, strikethrough, and syntax-highlighted code blocks.
+          tables, task lists, strikethrough, and syntax-highlighted code blocks —
+          all rendered beautifully in the PDF output.
         </p>
 
         <h3>Is my data safe with MarkBloom?</h3>

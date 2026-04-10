@@ -1,6 +1,8 @@
 # MarkBloom
 
-Free, open-source Markdown to PDF converter that runs entirely in your browser. Write Markdown, see a live preview, and export beautifully formatted PDFs — no sign-up, no server uploads. Your content never leaves your device.
+Turn your Markdown into beautiful, print-ready PDF documents — free, open-source, and 100% client-side.
+
+No ugly exports, no broken layouts. MarkBloom produces professionally formatted PDFs with smart pagination, clean typography, and syntax-highlighted code blocks. Write in the editor, see the final result live, and export with one click.
 
 [Live Demo](https://mertguvencli.github.io/markbloom)
 
@@ -9,31 +11,36 @@ Free, open-source Markdown to PDF converter that runs entirely in your browser. 
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-## Features
+## Why MarkBloom?
 
-- **Live Editor** — CodeMirror 6 powered Markdown editor with syntax highlighting
-- **Real-Time Preview** — Instant side-by-side preview as you type
-- **PDF Export** — One-click export with smart pagination and page break detection
-- **Multiple Page Sizes** — A4, US Letter, and Legal support
-- **GitHub Flavored Markdown** — Tables, task lists, strikethrough, and more
-- **Syntax Highlighting** — 100+ languages with Shiki (GitHub Dark theme)
-- **100% Client-Side** — Zero backend, zero data collection, complete privacy
+Most Markdown-to-PDF tools produce bland, poorly formatted output. MarkBloom is built with one goal: **beautiful PDF documents** from your Markdown.
 
-## Getting Started
+- **Professional Typography** — Clean heading hierarchy, balanced spacing, and print-optimized font rendering
+- **Smart Pagination** — Intelligent page breaks that never cut tables mid-row or orphan headings
+- **Syntax-Highlighted Code** — 100+ languages with Shiki (GitHub Dark theme), rendered beautifully in PDF
+- **Multiple Page Sizes** — A4, US Letter, and Legal with proper margins and layout
+- **Styled Tables & Lists** — Bordered tables, task lists, and nested content that actually look good in PDF
+- **Live Preview** — See exactly how your PDF will look as you type, no surprises
+
+## Quick Start
 
 ```bash
-# Clone the repository
 git clone https://github.com/mertguvencli/markbloom.git
 cd markbloom
-
-# Install dependencies
 pnpm install
-
-# Start development server
 pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## How It Works
+
+1. Write or paste Markdown in the editor
+2. See a pixel-perfect live preview of your PDF output
+3. Choose your page size (A4, Letter, or Legal)
+4. Click **Export PDF** — done
+
+Everything runs in your browser. Your content never leaves your device.
 
 ## Tech Stack
 
@@ -49,14 +56,11 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ## Build & Deploy
 
 ```bash
-# Production build
 pnpm build
-
-# Start production server
 pnpm start
 ```
 
-The project is configured for static export and can be deployed to GitHub Pages or any static hosting provider.
+Configured for static export — deploy to GitHub Pages or any static hosting provider.
 
 ## Contributing
 
