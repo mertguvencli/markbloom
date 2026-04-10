@@ -1,0 +1,36 @@
+# MarkBloom
+
+> Free, open-source Markdown to PDF converter with live preview.
+
+MarkBloom is a browser-based tool that converts Markdown into beautifully styled PDF documents. It features a real-time editor with syntax highlighting, a live preview panel, and one-click PDF export in A4, Letter, and Legal page sizes.
+
+## Key Features
+
+- Live Markdown editor with syntax highlighting (CodeMirror)
+- Real-time preview with Tailwind Typography styling
+- PDF export in A4, Letter, and Legal page sizes
+- GitHub Flavored Markdown support (tables, task lists, strikethrough)
+- Syntax-highlighted code blocks via Shiki
+- Runs entirely in the browser — no server-side processing
+- Free and open source (MIT license)
+
+## Use Cases
+
+- Converting technical documentation to PDF
+- Creating styled reports from Markdown
+- Exporting meeting notes and project docs as PDF
+- Generating printable documents from Markdown files
+
+## Tech Stack
+
+- Next.js (React framework)
+- CodeMirror (editor)
+- React Markdown + Remark GFM (Markdown parsing)
+- Shiki (syntax highlighting)
+- Tailwind CSS + Typography plugin (styling)
+- html2canvas + jsPDF (PDF generation)
+
+## Links
+
+- App: https://mertguvencli.github.io/markbloom
+- Source: https://github.com/mertguvencli/markbloom
