@@ -130,3 +130,16 @@
     @apply font-sans;
   }
 }
+
+/* When exporting to PDF, force code blocks to wrap long lines instead of
+   scrolling horizontally — otherwise html2canvas captures only the visible
+   width and overflowing code gets clipped. */
+.pdf-exporting pre {
+  overflow-x: visible !important;
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+}
+.pdf-exporting pre code {
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+}

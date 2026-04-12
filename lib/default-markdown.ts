@@ -1,16 +1,16 @@
 export const defaultMarkdown = `# MarkBloom
 
-Create **beautiful PDFs** from Markdown — styled with [Tailwind CSS](https://tailwindcss.com). Write in the editor, preview instantly, and export to PDF with a single click.
+Create **beautiful PDFs** from Markdown, styled with [Tailwind CSS](https://tailwindcss.com). Write in the editor, preview instantly, and export to PDF with a single click.
 
 ---
 
 ## Getting Started
 
-MarkBloom supports the full range of Markdown syntax. This document showcases every supported element so you can see how they render.
+This document showcases every supported Markdown element.
 
 ### Inline Formatting
 
-You can write **bold**, *italic*, and ***bold italic*** text. Use \`inline code\` for technical terms like \`useState\` or \`next.config.ts\`. Links work too — check out [GitHub](https://github.com) for more.
+You can write **bold**, *italic*, and ***bold italic*** text. Use \`inline code\` for technical terms like \`useState\` or \`next.config.ts\`. Links work too: [GitHub](https://github.com).
 
 ---
 
@@ -44,7 +44,7 @@ You can write **bold**, *italic*, and ***bold italic*** text. Use \`inline code\
 
 ## Code Blocks
 
-Syntax highlighting is powered by Shiki with the **GitHub Dark** theme.
+Syntax highlighting uses Shiki with the **GitHub Dark** theme.
 
 \`\`\`typescript
 interface Document {
@@ -90,8 +90,8 @@ print(f"{doc.title}: {doc.word_count()} words")
 |-------------------|------------------------------------|--------------|
 | Markdown Parsing  | Full CommonMark support            | Ready        |
 | Live Preview      | Real-time rendered output          | Ready        |
-| PDF Export        | High-quality document generation   | Ready        |
-| Syntax Highlight  | Shiki-powered code blocks          | Ready        |
+| PDF Export        | One-click document generation      | Ready        |
+| Syntax Highlight  | Shiki code blocks                  | Ready        |
 | Page Sizes        | A4, Letter, Legal formats          | Ready        |
 | Custom Themes     | User-defined color schemes         | Coming Soon  |
 
@@ -100,9 +100,21 @@ print(f"{doc.title}: {doc.word_count()} words")
 ## Blockquotes
 
 > "Simplicity is the ultimate sophistication."
-> — Leonardo da Vinci
+> -- Leonardo da Vinci
 
 > **Tip:** You can nest *any* Markdown syntax inside blockquotes, including **bold text**, \`inline code\`, and [links](https://example.com).
+
+---
+
+## HTML Support
+
+Inline HTML is supported, just like on GitHub.
+
+<p align="center">
+  <img src="/images/OpenAI_Paris_1x1.jpg" alt="Markdown Logo" width="128" height="80">
+</p>
+
+<h3 align="center">Centered headings and images work out of the box.</h3>
 
 ---
 
@@ -114,13 +126,13 @@ print(f"{doc.title}: {doc.word_count()} words")
 
 ## Horizontal Rules
 
-Use three dashes to create a horizontal rule and separate sections visually.
+Use three dashes to create a horizontal rule.
 
 ---
 
 ### Heading Level 3
 
-This is a paragraph under a level-3 heading. It demonstrates the typographic hierarchy that MarkBloom applies to your documents. Each heading level has distinct sizing and weight to create a clear visual structure.
+This is a paragraph under a level-3 heading. Each heading level has distinct sizing and weight to create a clear visual hierarchy.
 
 ---
 
