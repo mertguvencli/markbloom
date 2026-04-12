@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 import { MarkdownEditor } from "@/components/markdown-editor";
 import { MarkdownPreview } from "@/components/markdown-preview";
 import { usePdfExport } from "@/lib/use-pdf-export";
@@ -14,7 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import { FileDown, FileText, Eye, Loader2, DownloadIcon } from "lucide-react";
+import { Loader2, DownloadIcon } from "lucide-react";
 
 type PageSize = "a4" | "letter" | "legal";
 
@@ -27,8 +27,59 @@ const pageSizeLabels: Record<PageSize, string> = {
 export default function Home() {
   const [markdown, setMarkdown] = useState(defaultMarkdown);
   const [pageSize, setPageSize] = useState<PageSize>("a4");
+  const [editorWidth, setEditorWidth] = useState(35);
+  const dragging = useRef(false);
   const previewRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const { exportPdf, exporting } = usePdfExport(previewRef, pageSize);
+
+  const clampWidth = (pct: number) => Math.min(80, Math.max(20, pct));
+
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    dragging.current = true;
+
+    const onMouseMove = (e: MouseEvent) => {
+      if (!dragging.current || !containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const pct = ((e.clientX - rect.left) / rect.width) * 100;
+      setEditorWidth(clampWidth(pct));
+    };
+
+    const onMouseUp = () => {
+      dragging.current = false;
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
+    };
+
+    document.body.style.cursor = "col-resize";
+    document.body.style.userSelect = "none";
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
+  }, []);
+
+  const handleTouchStart = useCallback((_e: React.TouchEvent) => {
+    dragging.current = true;
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (!dragging.current || !containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const touch = e.touches[0];
+      const pct = ((touch.clientY - rect.top) / rect.height) * 100;
+      setEditorWidth(clampWidth(pct));
+    };
+
+    const onTouchEnd = () => {
+      dragging.current = false;
+      document.removeEventListener("touchmove", onTouchMove);
+      document.removeEventListener("touchend", onTouchEnd);
+    };
+
+    document.addEventListener("touchmove", onTouchMove);
+    document.addEventListener("touchend", onTouchEnd);
+  }, []);
 
   return (
     <div className="flex h-screen flex-col">
@@ -87,25 +138,38 @@ export default function Home() {
       </header>
 
       {/* Main content */}
-      <div className="flex flex-1 overflow-hidden">
+      <div ref={containerRef} className="flex flex-1 flex-col overflow-hidden md:flex-row">
         {/* Editor panel */}
-        <div className="flex w-1/2 flex-col border-r border-zinc-200">
-          {/* <div className="flex h-10 shrink-0 items-center gap-2 border-b border-zinc-100 bg-zinc-50 px-4">
-            <FileText className="size-3.5 text-zinc-400" />
-            <span className="text-xs font-medium text-zinc-500">Editor</span>
-          </div> */}
+        <div
+          className="flex min-h-[200px] flex-col border-b border-zinc-200 md:min-h-0 md:min-w-[280px] md:border-b-0 md:border-r"
+          style={{ flex: `0 0 ${editorWidth}%` }}
+        >
           <div className="flex-1 overflow-hidden">
             <MarkdownEditor value={markdown} onChange={setMarkdown} />
           </div>
         </div>
 
+        {/* Resize handle */}
+        <div
+          className="hidden md:flex shrink-0 w-0 relative items-center justify-center cursor-col-resize group z-10"
+          onMouseDown={handleMouseDown}
+        >
+          <div className="absolute inset-y-0 -left-1 -right-1 group-hover:bg-zinc-300/50 transition-colors" />
+          <div className="relative h-8 w-1 rounded-full bg-zinc-300 group-hover:bg-zinc-400 transition-colors" />
+        </div>
+
+        {/* Mobile resize handle */}
+        <div
+          className="flex md:hidden shrink-0 h-0 relative items-center justify-center cursor-row-resize group z-10"
+          onTouchStart={handleTouchStart}
+        >
+          <div className="absolute inset-x-0 -top-1 -bottom-1 group-hover:bg-zinc-300/50 transition-colors" />
+          <div className="relative w-8 h-1 rounded-full bg-zinc-300 group-hover:bg-zinc-400 transition-colors" />
+        </div>
+
         {/* Preview panel */}
-        <div className="flex w-1/2 flex-col">
-          {/* <div className="flex h-10 shrink-0 items-center gap-2 border-b border-zinc-100 bg-zinc-50 px-4">
-            <Eye className="size-3.5 text-zinc-400" />
-            <span className="text-xs font-medium text-zinc-500">Preview</span>
-          </div> */}
-          <div className="flex-1 overflow-auto bg-zinc-100 p-8">
+        <div className="flex min-h-[200px] flex-1 flex-col md:min-h-0 md:min-w-[280px]">
+          <div className="flex-1 overflow-auto p-8 bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-size-[16px_16px]">
             <MarkdownPreview
               ref={previewRef}
               content={markdown}
