@@ -96,7 +96,7 @@ export const markdownComponents: Components = {
   pre: ({ children }) => <>{children}</>,
   table: ({ children }) => (
     <div className="overflow-hidden rounded-lg border border-zinc-200">
-      <table className="text-sm m-0!">{children}</table>
+      <table className="text-sm m-0! border-collapse **:border-style-solid">{children}</table>
     </div>
   ),
   th: ({ children }) => (
@@ -110,8 +110,8 @@ export const markdownComponents: Components = {
     </td>
   ),
   hr: () => <hr className="border-zinc-100" />,
-  img: ({ src, alt }) => (
-    <img src={src} alt={alt ?? ""} className="rounded-lg" />
+  img: ({ src, alt, width, height }) => (
+    <img src={src} alt={alt ?? ""} width={width} height={height} className="rounded-lg" />
   ),
   li: ({ children }) => <li className="marker:text-black leading-4">{children}</li>,
 };
