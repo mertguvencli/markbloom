@@ -118,6 +118,21 @@ Inline HTML is supported, just like on GitHub.
 
 ---
 
+## Diagrams
+
+Mermaid diagrams are rendered automatically from fenced code blocks.
+
+\`\`\`mermaid
+graph TD
+    A[Write Markdown] --> B[Live Preview]
+    B --> C{Satisfied?}
+    C -->|Yes| D[Export PDF]
+    C -->|No| A
+    D --> E[Done!]
+\`\`\`
+
+---
+
 ## Images
 
 ![Placeholder](https://placehold.co/800x300/f4f4f5/a1a1aa?text=MarkBloom+Image+Preview)
