@@ -131,6 +131,60 @@
   }
 }
 
+/* Use tabular (fixed-width) numbers on ordered lists so markers align
+   consistently — html2canvas renders proportional figures at slightly
+   different widths, causing misaligned numbering in PDF exports. */
+.prose ol {
+  font-variant-numeric: tabular-nums;
+}
+.prose ol > li::marker {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Remove smart quotes that Tailwind Typography adds to blockquotes —
+   they show up as extra quotation marks in PDF exports. */
+.prose blockquote p::before,
+.prose blockquote p::after {
+  content: none !important;
+}
+
+/* Remove backtick pseudo-elements that Tailwind Typography adds to
+   inline code — html2canvas cannot resolve utility-class overrides
+   (before:content-none) reliably, causing text to vanish in PDF exports. */
+.prose :where(code):not(:where(pre *))::before,
+.prose :where(code):not(:where(pre *))::after {
+  content: none !important;
+}
+
+/* Ensure HTML align attributes work (html2canvas needs explicit CSS) */
+[align="center"] {
+  text-align: center !important;
+}
+[align="right"] {
+  text-align: right !important;
+}
+
+/* Style <details>/<summary> properly since html2canvas can't render
+   the native widget. */
+.prose details {
+  border: 1px solid var(--border, #e4e4e7);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+}
+.prose details summary {
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  margin-bottom: 0;
+}
+.prose details summary::-webkit-details-marker {
+  display: none;
+}
+.prose details[open] summary {
+  margin-bottom: 0.5rem;
+}
+
 /* When exporting to PDF, force code blocks to wrap long lines instead of
    scrolling horizontally — otherwise html2canvas captures only the visible
    width and overflowing code gets clipped. */
@@ -142,4 +196,9 @@
 .pdf-exporting pre code {
   white-space: pre-wrap !important;
   word-break: break-word !important;
+}
+
+/* Force details open during PDF export */
+.pdf-exporting details {
+  open: true;
 }
