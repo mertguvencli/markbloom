@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import { MarkdownEditor } from "@/components/markdown-editor";
 import { MarkdownPreview } from "@/components/markdown-preview";
 import { usePdfExport } from "@/lib/use-pdf-export";
@@ -14,7 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import { Loader2, DownloadIcon } from "lucide-react";
+import { Loader2, DownloadIcon, EyeIcon, XIcon, Maximize2Icon, Minimize2Icon } from "lucide-react";
 
 type PageSize = "a4" | "letter" | "legal";
 
@@ -28,10 +28,20 @@ export default function Home() {
   const [markdown, setMarkdown] = useState(defaultMarkdown);
   const [pageSize, setPageSize] = useState<PageSize>("a4");
   const [editorWidth, setEditorWidth] = useState(35);
+  const [previewOnly, setPreviewOnly] = useState(false);
   const dragging = useRef(false);
   const previewRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const { exportPdf, exporting } = usePdfExport(previewRef, pageSize);
+
+  useEffect(() => {
+    if (!previewOnly) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setPreviewOnly(false);
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [previewOnly]);
 
   const clampWidth = (pct: number) => Math.min(80, Math.max(20, pct));
 
@@ -98,6 +108,17 @@ export default function Home() {
         </div>
 
         <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => setPreviewOnly(true)}
+            title="Preview only"
+          >
+            <Maximize2Icon className="size-4" />
+          </Button>
+
+          <Separator orientation="vertical" className="h-6" />
+
           <Select
             value={pageSize}
             onValueChange={(v) => setPageSize(v as PageSize)}
@@ -178,6 +199,28 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* Preview-only fullscreen modal */}
+      {previewOnly && (
+        <div className="fixed inset-0 z-50 flex flex-col bg-white">
+          <div className="flex shrink-0 justify-end p-4">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={() => setPreviewOnly(false)}
+            >
+              <Minimize2Icon className="size-4" />
+            </Button>
+          </div>
+          <div className="flex-1 overflow-auto px-8 pb-8">
+            <MarkdownPreview
+              fluid
+              content={markdown}
+              pageSize={pageSize}
+            />
+          </div>
+        </div>
+      )}
 
       {/* SEO content — visible to crawlers, visually hidden from app UI */}
       <footer className="sr-only" aria-label="About MarkBloom">

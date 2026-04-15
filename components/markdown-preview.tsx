@@ -13,6 +13,7 @@ interface MarkdownPreviewProps {
   content: string;
   className?: string;
   pageSize: "a4" | "letter" | "legal";
+  fluid?: boolean;
 }
 
 const pageSizes = {
@@ -22,23 +23,24 @@ const pageSizes = {
 };
 
 export const MarkdownPreview = forwardRef<HTMLDivElement, MarkdownPreviewProps>(
-  function MarkdownPreview({ content, className, pageSize }, ref) {
+  function MarkdownPreview({ content, className, pageSize, fluid }, ref) {
     const size = pageSizes[pageSize];
 
     return (
       <div
         ref={ref}
         className={cn(
-          "bg-white text-zinc-900 shadow-lg mx-auto",
+          "bg-white text-zinc-900 mx-auto",
+          !fluid && "shadow-lg",
           className
         )}
-        style={{
+        style={fluid ? { maxWidth: "860px", width: "100%" } : {
           width: size.width,
           minHeight: size.minHeight,
-          padding: "40px 50px",
+          padding: !fluid && "40px 50px",
         }}
       >
-        <article className="prose prose-zinc max-w-none">
+        <article className="prose prose-zinc max-w-none" style={{ color: "#3f3f46" }}>
           <ReactMarkdown
             remarkPlugins={[remarkGfm, remarkMath]}
             rehypePlugins={[rehypeRaw, rehypeKatex]}

@@ -142,6 +142,12 @@ export function usePdfExport(
 
     setExporting(true);
     element.classList.add("pdf-exporting");
+
+    // Force all <details> elements open so html2canvas can capture their content
+    const detailsElements = element.querySelectorAll("details");
+    const detailsPreviousState = Array.from(detailsElements).map((d) => d.open);
+    detailsElements.forEach((d) => (d.open = true));
+
     try {
       const html2canvas = (await import("html2canvas-pro")).default;
       const { jsPDF } = await import("jspdf");
@@ -236,6 +242,8 @@ export function usePdfExport(
 
       pdf.save("markbloom-export.pdf");
     } finally {
+      // Restore <details> elements to their previous state
+      detailsElements.forEach((d, i) => (d.open = detailsPreviousState[i]));
       element.classList.remove("pdf-exporting");
       setExporting(false);
     }

@@ -145,7 +145,7 @@ export const markdownComponents: Components = {
       );
     }
     return (
-      <code className="mb-5 rounded bg-zinc-100 px-1.5 py-0.5 text-sm font-normal before:content-none after:content-none">
+      <code className="rounded bg-zinc-100 px-1.5 py-0.5 text-sm font-normal">
         {children}
       </code>
     );
