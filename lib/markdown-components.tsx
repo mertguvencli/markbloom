@@ -1,8 +1,62 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import type { Components } from "react-markdown";
 import type { BundledLanguage } from "shiki";
+
+function MermaidBlock({ children }: { children: string }) {
+  const id = useId().replace(/:/g, "m");
+  const [svg, setSvg] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    import("mermaid").then(({ default: mermaid }) => {
+      if (cancelled) return;
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: "neutral",
+        securityLevel: "loose",
+      });
+      mermaid
+        .render(`mermaid-${id}`, children.replace(/\n$/, ""))
+        .then(({ svg: renderedSvg }: { svg: string }) => {
+          if (!cancelled) setSvg(renderedSvg);
+        })
+        .catch((err: unknown) => {
+          if (!cancelled) setError(String(err));
+        });
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [children, id]);
+
+  if (error) {
+    return (
+      <pre className="mb-5 rounded-lg border border-red-300 bg-red-50 text-red-700 p-4 text-sm">
+        <code>{error}</code>
+      </pre>
+    );
+  }
+
+  if (svg) {
+    return (
+      <div
+        className="mb-5 flex justify-center rounded-lg border border-zinc-200 bg-white p-4 [&_svg]:max-w-full"
+        dangerouslySetInnerHTML={{ __html: svg }}
+      />
+    );
+  }
+
+  return (
+    <div className="mb-5 flex justify-center rounded-lg border border-zinc-200 bg-zinc-50 p-8 text-zinc-400 text-sm">
+      Rendering diagram…
+    </div>
+  );
+}
 
 function CodeBlock({
   language,
@@ -77,6 +131,9 @@ export const markdownComponents: Components = {
   code: ({ children, className }) => {
     const match = className?.match(/language-(\w+)/);
     if (match) {
+      if (match[1] === "mermaid") {
+        return <MermaidBlock>{String(children)}</MermaidBlock>;
+      }
       return <CodeBlock language={match[1]} children={String(children)} />;
     }
     // Block code without a language (inside <pre>)
