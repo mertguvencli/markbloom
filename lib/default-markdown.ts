@@ -133,6 +133,22 @@ graph TD
 
 ---
 
+## Math & LaTeX
+
+Inline math works with single dollar signs: $E = mc^2$ and $\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}$.
+
+Block equations use double dollar signs:
+
+$$
+\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}
+$$
+
+$$
+f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} \\exp\\left(-\\frac{(x - \\mu)^2}{2\\sigma^2}\\right)
+$$
+
+---
+
 ## Images
 
 ![Placeholder](https://placehold.co/800x300/f4f4f5/a1a1aa?text=MarkBloom+Image+Preview)
