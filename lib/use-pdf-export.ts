@@ -130,9 +130,18 @@ function findBreakPoint(
   return candidate;
 }
 
+function toFileName(title: string | undefined): string {
+  const cleaned = (title ?? "")
+    .replace(/[\\/:*?"<>|]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  return cleaned || "markbloom-export";
+}
+
 export function usePdfExport(
   previewRef: RefObject<HTMLDivElement | null>,
-  pageSize: PageSize
+  pageSize: PageSize,
+  title?: string
 ) {
   const [exporting, setExporting] = useState(false);
 
@@ -240,14 +249,14 @@ export function usePdfExport(
         pdf.addImage(pageData, "JPEG", 0, 0, pdfWidthMm, pdfHeightMm, undefined, "FAST");
       }
 
-      pdf.save("markbloom-export.pdf");
+      pdf.save(`${toFileName(title)}.pdf`);
     } finally {
       // Restore <details> elements to their previous state
       detailsElements.forEach((d, i) => (d.open = detailsPreviousState[i]));
       element.classList.remove("pdf-exporting");
       setExporting(false);
     }
-  }, [previewRef, pageSize]);
+  }, [previewRef, pageSize, title]);
 
   return { exportPdf, exporting };
 }
