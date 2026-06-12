@@ -31,7 +31,6 @@ export const MarkdownPreview = forwardRef<HTMLDivElement, MarkdownPreviewProps>(
         ref={ref}
         className={cn(
           "bg-white text-zinc-900 mx-auto",
-          !fluid && "shadow-lg",
           className
         )}
         style={fluid ? { maxWidth: "860px", width: "100%" } : {

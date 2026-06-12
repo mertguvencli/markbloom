@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { EditorState } from "@codemirror/state";
+import { Annotation, EditorState } from "@codemirror/state";
 import { EditorView, keymap, lineNumbers, highlightActiveLine, drawSelection, placeholder as cmPlaceholder, rectangularSelection, crosshairCursor } from "@codemirror/view";
 import { defaultKeymap, history, historyKeymap, indentWithTab } from "@codemirror/commands";
 import { markdown } from "@codemirror/lang-markdown";
@@ -50,6 +50,10 @@ const editorTheme = EditorView.theme({
   },
 });
 
+/** Marks transactions that sync the `value` prop (e.g. switching documents),
+ * so they don't count as user edits. */
+const externalChange = Annotation.define<boolean>();
+
 interface MarkdownEditorProps {
   value: string;
   onChange: (value: string) => void;
@@ -63,7 +67,10 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
   onChangeRef.current = onChange;
 
   const handleChange = EditorView.updateListener.of((update) => {
-    if (update.docChanged) {
+    if (
+      update.docChanged &&
+      !update.transactions.some((tr) => tr.annotation(externalChange))
+    ) {
       onChangeRef.current(update.state.doc.toString());
     }
   });
@@ -115,6 +122,7 @@ export function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
           to: currentValue.length,
           insert: value,
         },
+        annotations: externalChange.of(true),
       });
     }
   }, [value]);
